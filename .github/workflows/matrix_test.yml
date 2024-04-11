@@ -47,6 +47,7 @@ jobs:
           az aks get-credentials --resource-group ${{ secrets.AZURE_RESOURCE_GROUP_NAME }} --name ${{ secrets.AKS_NAME }}
       - name: Apply Kubernetes Configuration
         run: |
+          cd manifests
           envsubst < app.yaml | kubectl apply -f -
         env:
           FRONTEND_REPLICAS: ${{ matrix.frontend_replicas }}
